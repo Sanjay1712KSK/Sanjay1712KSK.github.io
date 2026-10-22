@@ -7,7 +7,6 @@ function App() {
   const [activeTab, setActiveTab] = useState<'home' | 'media' | 'resume' | 'blog' | 'github'>('home');
   const [selectedArticle, setSelectedArticle] = useState<number | null>(null);
 
-
   useEffect(() => {
     // General scroll observer for fade-ups
     const observerOptions = {
@@ -63,63 +62,168 @@ function App() {
     };
   }, [activeTab, selectedArticle]);
 
+  const education = {
+    degree: "B.Tech in Computer Science and Engineering (AI & ML)",
+    institution: "SRM University, KTR, Chennai",
+    duration: "2023 – 2027",
+    cgpa: "9.46",
+    location: "Chennai, India"
+  };
+
   const experience = [
     {
-      role: "Undergraduate Researcher",
-      company: "SRM Institute of Science and Technology",
-      date: "2025 – Present",
+      role: "IT & Systems Support Engineer",
+      company: "MEDBE Pharma and Healthcare",
+      location: "Cochin, India | Partial Remote",
+      date: "June 2025 – August 2026",
       points: [
-        "Developed reinforcement learning control policies in Unreal Engine 5",
-        "Designed reward functions and state representations",
-        "Benchmarked autonomous navigation performance",
-        "Optimized real-time simulation and system-level pipelines"
+        "Manage Linux-based IT infrastructure and technical operations for internal organizational systems.",
+        "Support RBAC-based Linux environments used in billing, cash management, and operational workflows.",
+        "Handle software deployment, system configuration, troubleshooting, and technical support for day-to-day business operations.",
+        "Contribute to the development, deployment, and maintenance of medbe.in, the official web presence platform for MedBe Pharmacy."
+      ]
+    },
+    {
+      role: "Undergraduate Researcher – SRM UROP Program",
+      company: "SRM Institute of Science and Technology",
+      location: "Chennai, India",
+      date: "November 2025 – Present",
+      points: [
+        "Develop reinforcement learning policies for autonomous drone navigation using Unreal Engine 5 and Cosys AirSim.",
+        "Design reward functions, state representations, and evaluation metrics for simulated navigation tasks.",
+        "Optimize simulation runtime performance and environment interaction pipelines.",
+        "Conduct experiments on high-fidelity simulation environments for autonomous systems research."
       ]
     }
   ];
 
   const projects = [
     {
+      title: "Frame Generator",
+      category: "Computer Vision • GPU Systems • Annotation",
+      desc: "Built a high-throughput TrackNet dataset workstation with CUDA/NVDEC extraction, dynamic resource profiling, fault-tolerant resume, persistent jobs, and 1,770+ FPS processing. Developed a 5-state annotation workspace with motion-blur handling, CSV synchronization, range inspection, dataset telemetry, and SAM 2.1 + Docker integration for semi-automatic tracking.",
+      techStack: "Python / PySide6 / CUDA (NVDEC) / SAM 2.1 / Docker / FFmpeg / PyInstaller",
+      tags: ["Computer Vision", "CUDA / NVDEC", "SAM 2.1", "PySide6", "Docker", "FFmpeg"],
+      links: [
+        { label: "View on GitHub", url: "https://github.com/Sanjay1712KSK" }
+      ]
+    },
+    {
+      title: "Aero-Controllers",
+      category: "Reinforcement Learning • Robotics",
+      desc: "Developed an RL-based autonomous drone stabilization framework using high-fidelity Unreal Engine simulation, with custom reward functions, state representations, and PPO control policies for GPS-denied environments. Built an interactive research documentation platform covering the simulation, training, and evaluation workflow.",
+      techStack: "Unreal Engine 5.5 / Cosys-AirSim / PPO (Stable-Baselines3) / Next.js / React / Three.js",
+      tags: ["Reinforcement Learning", "Unreal Engine 5.5", "Cosys-AirSim", "PPO (Stable-Baselines3)", "Three.js"],
+      links: [
+        { label: "View on GitHub", url: "https://github.com/Sanjay1712KSK/Aero-Controllers" },
+        { label: "Live Demo", url: "https://sanjay1712ksk.github.io/Aero-Controllers/", primary: true }
+      ]
+    },
+    {
+      title: "LLLMao",
+      category: "Local AI • Systems • DevOps",
+      desc: "Developing a privacy-first local AI workstation combining local LLM inference, RAG, document ingestion, vector search, FastAPI services, and a Tauri desktop interface. Supports Linux-focused deployment with containerized/local services and Ubuntu Snap packaging.",
+      techStack: "React / TypeScript / FastAPI / ChromaDB / Tauri (Rust) / Ollama / SQLite",
+      tags: ["Local AI", "FastAPI", "ChromaDB", "Tauri (Rust)", "Ollama", "RAG", "SQLite"],
+      links: [
+        { label: "View on GitHub", url: "https://github.com/Sanjay1712KSK/LLLMao" }
+      ]
+    },
+    {
       title: "Cattle-Go",
-      desc: "AI-powered cattle breed classification system using computer vision and deep learning with multilingual support and RAG chatbot.",
-      tags: ["Computer Vision", "Deep Learning", "RAG"],
-      github: "https://github.com/Sanjay1712KSK/Cattle-Go"
+      category: "Computer Vision • Deep Learning",
+      desc: "Built an AI livestock breed classification system for Indian cattle using MobileNetV2, with real-time detection, multilingual support, and an Ollama-powered RAG assistant.",
+      techStack: "Flutter / FastAPI / TensorFlow-Keras (MobileNetV2) / Firebase / Hugging Face Spaces / Ollama",
+      tags: ["Computer Vision", "MobileNetV2", "Flutter", "FastAPI", "Firebase", "Ollama"],
+      links: [
+        { label: "View on GitHub", url: "https://github.com/Sanjay1712KSK/Cattle-Go" },
+        { label: "Live Demo", url: "https://sanjay1712ksk.github.io/Cattle-Go/", primary: true }
+      ]
     },
     {
-      title: "Drug MRP Price Prediction",
-      desc: "Machine learning model for pharmaceutical MRP estimation using structured data preprocessing and regression techniques.",
-      tags: ["Machine Learning", "Regression", "Data Preprocessing"],
-      github: "https://github.com/Sanjay1712KSK/Drug-MRP-Price-Prediction"
-    },
-    {
-      title: "Padayappa Paarvai",
-      desc: "Interactive repository structure visualizer converting JSON trees into dynamic hierarchical UI.",
-      tags: ["Web", "Interactive UI"],
-      github: "https://github.com/Sanjay1712KSK/Padayappa-Paarvai"
-    },
-    {
-      title: "Rule-Based Chatbot with UI",
-      desc: "React and TypeScript chatbot with persistent conversation handling and rule-processing engine.",
-      tags: ["React", "TypeScript"],
-      github: "https://github.com/Sanjay1712KSK/Rule-Based-Chatbot-with-UI"
-    },
-    {
-      title: "Simulation-Based Reinforcement Learning for Autonomous Systems",
-      desc: "Reinforcement learning control system built using Unreal Engine 5 and Cosys AirSim.",
-      tags: ["Reinforcement Learning", "Unreal Engine 5", "Cosys AirSim"],
-      github: "https://github.com/Sanjay1712KSK"
+      title: "GigShield (CampTech)",
+      category: "Full-Stack • AI/ML",
+      desc: "Developed an AI-powered parametric insurance platform using live weather, traffic, and AQI data for dynamic risk assessment, automated claims processing, and fraud detection.",
+      techStack: "Flutter / FastAPI / SQLAlchemy / JWT / SQLite / Open-Meteo / OpenWeather AQI / OpenRouteService",
+      tags: ["AI / ML", "FastAPI", "Flutter", "SQLAlchemy", "Parametric Insurance", "Open-Meteo"],
+      links: [
+        { label: "View on GitHub", url: "https://github.com/Sanjay1712KSK/CampTech" }
+      ]
     }
   ];
 
+  const technicalSkills = [
+    {
+      category: "Programming",
+      items: "Python, Dart, C, C++, Java, TypeScript"
+    },
+    {
+      category: "Frameworks & Tools",
+      items: "React, Vite, Flutter, FastAPI, Linux, Git, Unreal Engine 5, Cosys AirSim, Isaac Sim"
+    },
+    {
+      category: "Systems & Infrastructure",
+      items: "Linux System Administration, Performance Optimization, Kernel Fundamentals, UNIX, RBAC Systems"
+    },
+    {
+      category: "AI / ML Specialization",
+      items: "Machine Learning, Deep Learning, Reinforcement Learning, Computer Vision"
+    }
+  ];
 
   const achievements = [
     {
       title: "SRM SDG Hackathon – 3rd Place",
-      year: "2024"
+      organizer: "Organized by SRMIST",
+      location: "Chennai",
+      date: "Nov 2024"
     },
     {
-      title: "NLH AI x Legal Hackathon – 2nd Runner-Up",
-      year: "2025"
+      title: "NLH AI x Legal Hackathon – 2nd Place",
+      organizer: "Madras Institute of Technology (Anna University)",
+      location: "Chennai",
+      date: "Aug 2025"
     }
+  ];
+
+  const certifications = [
+    {
+      title: "SAP Certified – Generative AI Developer",
+      issuer: "SAP",
+      date: "2026"
+    },
+    {
+      title: "Course on Python",
+      issuer: "LIVEWIRE",
+      date: "Sept 2023"
+    },
+    {
+      title: "Course on Java",
+      issuer: "LIVEWIRE",
+      date: "Aug 2024"
+    },
+    {
+      title: "Linux Programming",
+      issuer: "SRMIST",
+      date: "Aug 2024"
+    }
+  ];
+
+  const languages = [
+    "English",
+    "Tamil",
+    "Hindi (Read & Write)",
+    "Telugu (Elementary Proficiency)"
+  ];
+
+  const interests = [
+    "Systems Engineering",
+    "Linux Infrastructure",
+    "Autonomous Systems",
+    "Kernel Development",
+    "Performance Optimization",
+    "Local AI Systems",
+    "Computer Vision"
   ];
 
   const blogs = [
@@ -309,34 +413,39 @@ function App() {
       <div className="app-container">
 
         {/* TOP NAVIGATION / TABS */}
-        <nav className="tab-nav mono animate-on-scroll">
+        <nav className="tab-nav mono animate-on-scroll" aria-label="Main Navigation">
           <button
             className={`tab-btn ${activeTab === 'home' ? 'active' : ''}`}
             onClick={() => setActiveTab('home')}
+            aria-label="Navigate to Home section"
           >
             ./home
           </button>
           <button
             className={`tab-btn ${activeTab === 'blog' ? 'active' : ''}`}
             onClick={() => { setActiveTab('blog'); setSelectedArticle(null); }}
+            aria-label="Navigate to Blog section"
           >
             ./blog
           </button>
           <button
             className={`tab-btn ${activeTab === 'media' ? 'active' : ''}`}
             onClick={() => setActiveTab('media')}
+            aria-label="Navigate to Project Demo Media"
           >
             ./project_demo_medias
           </button>
           <button
             className={`tab-btn ${activeTab === 'github' ? 'active' : ''}`}
             onClick={() => setActiveTab('github')}
+            aria-label="Navigate to GitHub Activity Diagnostics"
           >
             ./my_github_activity
           </button>
           <button
             className={`tab-btn ${activeTab === 'resume' ? 'active' : ''}`}
             onClick={() => setActiveTab('resume')}
+            aria-label="Navigate to Resume Viewer"
           >
             ./resume_viewer
           </button>
@@ -355,17 +464,23 @@ function App() {
                   <span className="separator">|</span>
                   <span>SRM University, Chennai</span>
                   <span className="separator">|</span>
-                  <span className="header-cgpa">CGPA: 9.44</span>
+                  <span className="header-cgpa">CGPA: 9.46</span>
                 </div>
 
-                <p className="hero-position-statement mono text-muted" style={{ marginTop: '0.8rem', fontSize: '1.05rem' }}>
-                  Building AI-driven autonomous and simulation-based systems.
+                <div className="hero-research-tag mono" style={{ marginTop: '0.6rem', color: 'var(--accent-cyan)', fontSize: '0.95rem' }}>
+                  Undergraduate Researcher – SRM UROP Program
+                </div>
+
+                <p className="hero-position-statement mono text-muted" style={{ marginTop: '0.8rem', fontSize: '1.05rem', lineHeight: '1.6' }}>
+                  Building AI-driven autonomous and simulation-based systems. Specializing in reinforcement learning control policies, computer vision annotation pipelines, and Linux systems infrastructure.
                 </p>
 
                 <div className="hero-actions" style={{ marginTop: '1.5rem' }}>
                   <a href="#projects" className="btn btn-primary">View Selected Work</a>
                   <button onClick={() => { setActiveTab('blog'); setSelectedArticle(null); window.scrollTo(0, 0); }} className="btn btn-secondary">Read My Blog</button>
-                  <a href="/resume.pdf" download="Sanjay_Kumar_S_Resume.pdf" className="btn btn-secondary">Download Resume</a>
+                  <button onClick={() => { setActiveTab('resume'); window.scrollTo(0, 0); }} className="btn btn-secondary">Resume Viewer</button>
+                  <a href="/resume.pdf" download="Sanjay_Kumar_S_CV.pdf" className="btn btn-secondary">Download CV</a>
+                  <a href="#contact" className="btn btn-secondary">Connect</a>
                 </div>
               </div>
               <div className="hero-right-col">
@@ -380,8 +495,26 @@ function App() {
               </h2>
               <div className="animate-on-scroll">
                 <p className="about-text">
-                  Computer Science student specializing in Artificial Intelligence and Machine Learning. Focused on reinforcement learning, computer vision, and simulation-based autonomous systems. Passionate about building reliable AI systems that operate under uncertainty and scale efficiently.
+                  Computer Science undergraduate specializing in Artificial Intelligence and Machine Learning at SRM University, KTR (CGPA: 9.46). Active researcher developing reinforcement learning control policies for autonomous drone navigation using Unreal Engine 5 and Cosys AirSim. Experienced in systems operations, managing Linux infrastructure and RBAC environments, and engineering high-throughput GPU-accelerated computer vision workstations. Passionate about building robust, verifiable AI systems that scale reliably in simulation and production environments.
                 </p>
+              </div>
+            </section>
+
+            {/* EDUCATION SECTION */}
+            <section className="section" id="education">
+              <h2 className="section-title mono">
+                <span className="typewriter-container"><span className="typewriter">Education</span></span>
+              </h2>
+              <div className="education-card animate-on-scroll">
+                <div className="edu-degree">{education.degree}</div>
+                <div className="edu-institution">{education.institution}</div>
+                <div className="edu-meta">
+                  <span>Duration: <strong className="mono">{education.duration}</strong></span>
+                  <span className="separator mx-2">|</span>
+                  <span>Location: <strong className="mono">{education.location}</strong></span>
+                  <span className="separator mx-2">|</span>
+                  <span className="edu-badge mono">Current CGPA: {education.cgpa}</span>
+                </div>
               </div>
             </section>
 
@@ -397,6 +530,8 @@ function App() {
                       <h3 className="exp-role">{exp.role}</h3>
                       <div className="exp-company-date">
                         <span className="exp-company text-muted">{exp.company}</span>
+                        <span className="separator mx-2">|</span>
+                        <span className="exp-company text-muted">{exp.location}</span>
                         <span className="separator mx-2">|</span>
                         <span className="exp-date mono">{exp.date}</span>
                       </div>
@@ -417,10 +552,10 @@ function App() {
                 <span className="typewriter-container"><span className="typewriter">Currently Building</span></span>
               </h2>
               <div className="building-list mono animate-on-scroll">
-                <div className="building-item">&gt; Simulation-based RL for autonomous navigation</div>
-                <div className="building-item">&gt; Reward shaping optimization strategies</div>
-                <div className="building-item">&gt; RAG-based intelligent advisory systems</div>
-                <div className="building-item">&gt; Experimenting with policy benchmarking frameworks</div>
+                <div className="building-item">&gt; Autonomous drone stabilization &amp; obstacle avoidance using PPO policies in Unreal Engine 5.5</div>
+                <div className="building-item">&gt; High-throughput TrackNet dataset workstation with CUDA/NVDEC acceleration (1,770+ FPS)</div>
+                <div className="building-item">&gt; Privacy-first local AI workstation combining local LLM inference, RAG, and vector search (LLLMao)</div>
+                <div className="building-item">&gt; Linux-focused containerized deployments, RBAC infrastructure optimization, and snap packages</div>
               </div>
             </section>
 
@@ -432,14 +567,16 @@ function App() {
               <div className="focus-grid animate-on-scroll">
                 <span className="focus-tag">Reinforcement Learning</span>
                 <span className="focus-tag">Autonomous Systems</span>
-                <span className="focus-tag">Simulation Environments</span>
-                <span className="focus-tag">System Performance Optimization</span>
-                <span className="focus-tag">Generative AI &amp; LLMs</span>
-                <span className="focus-tag">Kernel Fundamentals</span>
+                <span className="focus-tag">Simulation Environments (UE5 &amp; AirSim)</span>
+                <span className="focus-tag">GPU-Accelerated Systems (CUDA/NVDEC)</span>
+                <span className="focus-tag">Linux System Administration &amp; RBAC</span>
+                <span className="focus-tag">Local AI &amp; RAG Architecture</span>
+                <span className="focus-tag">Computer Vision &amp; Deep Learning</span>
+                <span className="focus-tag">Kernel Fundamentals &amp; Performance</span>
               </div>
             </section>
 
-            {/* PROJECTS SECTION */}
+            {/* SELECTED WORK (PROJECTS) SECTION */}
             <section className="section" id="projects">
               <h2 className="section-title mono">
                 <span className="typewriter-container"><span className="typewriter">Selected Work</span></span>
@@ -447,47 +584,52 @@ function App() {
               <div className="projects-grid">
                 {projects.map((proj, idx) => (
                   <div key={idx} className={`project-card animate-on-scroll delay-${(idx % 2 === 0 ? 100 : 200)}`}>
+                    <div className="project-category">{proj.category}</div>
                     <h3 className="project-title">{proj.title}</h3>
                     <p className="project-desc">{proj.desc}</p>
 
-                    <div className="project-tags" style={{ marginTop: '1rem' }}>
+                    <div className="project-tech-line">
+                      <span className="project-tech-label">Tech Stack:</span>
+                      <span>{proj.techStack}</span>
+                    </div>
+
+                    <div className="project-tags">
                       {proj.tags.map((tag, tIdx) => (
                         <span key={tIdx} className="project-tag">{tag}</span>
                       ))}
                     </div>
 
-                    <div style={{ marginTop: 'auto', paddingTop: '1.5rem' }}>
-                      <a href={proj.github} target="_blank" rel="noreferrer" className="btn btn-secondary" style={{ padding: '0.5rem 1rem', fontSize: '0.8rem' }}>
-                        View on GitHub
-                      </a>
+                    <div className="project-actions">
+                      {proj.links.map((link, lIdx) => (
+                        <a
+                          key={lIdx}
+                          href={link.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className={`btn ${link.primary ? 'btn-primary' : 'btn-secondary'}`}
+                          style={{ padding: '0.5rem 1.1rem', fontSize: '0.8rem' }}
+                        >
+                          {link.label}
+                        </a>
+                      ))}
                     </div>
                   </div>
                 ))}
               </div>
             </section>
 
-            {/* TECH STACK SECTION */}
+            {/* TECH STACK / CORE TECHNOLOGIES SECTION */}
             <section className="section" id="tech">
               <h2 className="section-title mono">
                 <span className="typewriter-container"><span className="typewriter">Core Technologies</span></span>
               </h2>
               <div className="tech-grid">
-                <div className="tech-card animate-on-scroll delay-100">
-                  <div className="tech-category">Programming</div>
-                  <div className="tech-items">Python, C, C++, Java, Dart, TypeScript</div>
-                </div>
-                <div className="tech-card animate-on-scroll delay-200">
-                  <div className="tech-category">AI / ML</div>
-                  <div className="tech-items">Machine Learning, Deep Learning, Reinforcement Learning, Computer Vision, RAG Systems</div>
-                </div>
-                <div className="tech-card animate-on-scroll delay-300">
-                  <div className="tech-category">Frameworks &amp; Tools</div>
-                  <div className="tech-items">React 18, Vite, Git, MySQL, Unreal Engine 5, Cosys AirSim</div>
-                </div>
-                <div className="tech-card animate-on-scroll delay-100">
-                  <div className="tech-category">Systems</div>
-                  <div className="tech-items">Linux, UNIX, Performance Optimization</div>
-                </div>
+                {technicalSkills.map((skill, sIdx) => (
+                  <div key={sIdx} className={`tech-card animate-on-scroll delay-${(sIdx + 1) * 100}`}>
+                    <div className="tech-category">{skill.category}</div>
+                    <div className="tech-items">{skill.items}</div>
+                  </div>
+                ))}
               </div>
             </section>
 
@@ -499,10 +641,51 @@ function App() {
               <div className="achievements-list">
                 {achievements.map((ach, idx) => (
                   <div key={idx} className="achievement-item animate-on-scroll delay-100">
-                    <span className="ach-title">{ach.title}</span>
-                    <span className="ach-year mono">({ach.year})</span>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', flex: 1 }}>
+                      <span className="ach-title">{ach.title}</span>
+                      <span className="ach-organizer">{ach.organizer} • {ach.location}</span>
+                    </div>
+                    <span className="ach-year mono">{ach.date}</span>
                   </div>
                 ))}
+              </div>
+            </section>
+
+            {/* CERTIFICATIONS SECTION */}
+            <section className="section" id="certifications">
+              <h2 className="section-title mono">
+                <span className="typewriter-container"><span className="typewriter">Certifications</span></span>
+              </h2>
+              <div className="certifications-grid">
+                {certifications.map((cert, cIdx) => (
+                  <div key={cIdx} className="cert-card animate-on-scroll delay-100">
+                    <div className="cert-title">{cert.title}</div>
+                    <div className="cert-issuer">{cert.issuer}</div>
+                    <div className="cert-date">{cert.date}</div>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* LANGUAGES & INTERESTS SECTION */}
+            <section className="section" id="profile-meta">
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
+                <div className="animate-on-scroll">
+                  <h3 className="mono" style={{ color: 'var(--accent-cyan)', fontSize: '1rem', marginBottom: '0.8rem' }}>Languages</h3>
+                  <div className="tags-container">
+                    {languages.map((lang, lIdx) => (
+                      <span key={lIdx} className="tag-badge">{lang}</span>
+                    ))}
+                  </div>
+                </div>
+                <div className="animate-on-scroll delay-100">
+                  <h3 className="mono" style={{ color: 'var(--accent-violet)', fontSize: '1rem', marginBottom: '0.8rem' }}>Key Interests</h3>
+                  <div className="tags-container">
+                    {interests.map((int, iIdx) => (
+                      <span key={iIdx} className="tag-badge">{int}</span>
+                    ))}
+                  </div>
+                </div>
               </div>
             </section>
 
@@ -512,10 +695,14 @@ function App() {
                 <span className="typewriter-container"><span className="typewriter">Connect</span></span>
               </h2>
               <div className="animate-on-scroll delay-100">
+                <p className="text-muted" style={{ marginBottom: '1.5rem', maxWidth: '650px', fontSize: '1.05rem', lineHeight: '1.6' }}>
+                  Open to research collaborations, AI/ML engineering roles, autonomous robotics projects, and systems development discussions.
+                </p>
                 <div className="contact-links">
-                  <a href="mailto:sanjayksk1712@gmail.com" className="contact-link">Email: sanjayksk1712@gmail.com</a>
-                  <a href="https://github.com/Sanjay1712KSK" className="contact-link" target="_blank" rel="noreferrer">GitHub: https://github.com/Sanjay1712KSK</a>
-                  <a href="https://www.linkedin.com/in/sanjaykumarksk/" className="contact-link" target="_blank" rel="noreferrer">LinkedIn: https://www.linkedin.com/in/sanjaykumarksk/</a>
+                  <a href="mailto:sanjayksk1712@gmail.com" className="contact-link" aria-label="Send email to Sanjay Kumar S">Email: sanjayksk1712@gmail.com</a>
+                  <a href="tel:+919487044111" className="contact-link" aria-label="Phone number">+91 94870 44111</a>
+                  <a href="https://github.com/Sanjay1712KSK" className="contact-link" target="_blank" rel="noreferrer" aria-label="Visit Sanjay's GitHub Profile">GitHub: https://github.com/Sanjay1712KSK</a>
+                  <a href="https://www.linkedin.com/in/sanjaykumarksk/" className="contact-link" target="_blank" rel="noreferrer" aria-label="Visit Sanjay's LinkedIn Profile">LinkedIn: https://www.linkedin.com/in/sanjaykumarksk/</a>
                 </div>
                 <div style={{ marginTop: '3rem', fontFamily: 'var(--font-mono)', color: 'var(--accent-cyan)' }}>
                   root@portfolio:~$ <span className="blinking-cursor"></span>
@@ -579,7 +766,7 @@ function App() {
         )}
 
         {activeTab === 'media' && (
-          /* MEDIA / DEMOS SECTION (UNDER DEVELOPMENT) */
+          /* MEDIA / DEMOS SECTION */
           <section className="section animate-on-scroll" id="media-demos" style={{ minHeight: '60vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', paddingTop: '4rem' }}>
             <div style={{ width: '100%', maxWidth: '800px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
               <h2 className="mono" style={{ color: 'var(--accent-blue)', opacity: 0.8, fontSize: '1rem', letterSpacing: '1px', marginBottom: '2rem' }}>
@@ -601,18 +788,18 @@ function App() {
             </h2>
             <div className="resume-container" style={{ marginTop: '2rem' }}>
               <div className="resume-actions" style={{ marginBottom: '2rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-                <a href="/resume.pdf" target="_blank" rel="noreferrer" className="btn btn-primary">Open in New Tab</a>
-                <a href="/resume.pdf" download="Sanjay_Kumar_S_Resume.pdf" className="btn btn-secondary">Download PDF</a>
+                <a href="/resume.pdf" target="_blank" rel="noreferrer" className="btn btn-primary" aria-label="Open Resume in new tab">Open in New Tab</a>
+                <a href="/resume.pdf" download="Sanjay_Kumar_S_CV.pdf" className="btn btn-secondary" aria-label="Download Sanjay Kumar S CV PDF">Download PDF</a>
               </div>
               <div className="resume-wrapper" style={{ width: '100%', height: '80vh', border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: '8px', overflow: 'hidden', background: 'rgba(0,0,0,0.2)' }}>
                 <iframe
                   src="/resume.pdf"
-                  title="Sanjay Kumar S Resume"
+                  title="Sanjay Kumar S CV"
                   width="100%"
                   height="100%"
                   style={{ border: 'none' }}
                 >
-                  <p>Your browser does not support PDFs. <a href="/resume.pdf" download="Sanjay_Kumar_S_Resume.pdf">Download the PDF</a>.</p>
+                  <p>Your browser does not support PDFs. <a href="/resume.pdf" download="Sanjay_Kumar_S_CV.pdf">Download the PDF</a>.</p>
                 </iframe>
               </div>
             </div>
@@ -635,9 +822,12 @@ function App() {
         )}
 
         {/* FOOTER */}
-        <footer style={{ textAlign: 'center', padding: '2rem 0', marginTop: '4rem', borderTop: '1px solid rgba(255, 255, 255, 0.05)' }}>
-          <p className="mono text-muted" style={{ fontSize: '0.9rem' }}>
-            Sanjay Kumar S all rights reserved 2026
+        <footer style={{ textAlign: 'center', padding: '2.5rem 0', marginTop: '4rem', borderTop: '1px solid rgba(255, 255, 255, 0.05)' }}>
+          <p className="mono text-muted" style={{ fontSize: '0.9rem', marginBottom: '0.5rem' }}>
+            Sanjay Kumar S • AI Systems &amp; Autonomous Systems Engineer
+          </p>
+          <p className="mono" style={{ fontSize: '0.8rem', color: 'rgba(255, 255, 255, 0.3)' }}>
+            All rights reserved 2026 • Deployed via GitHub Pages
           </p>
         </footer>
       </div>
