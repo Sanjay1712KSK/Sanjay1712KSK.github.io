@@ -68,7 +68,9 @@ function App() {
     };
 
     const observer = new IntersectionObserver(handleIntersect, observerOptions);
-    const elementsToReveal = document.querySelectorAll('.section, .project-editorial-card, .research-panel, .experience-entry, .education-card, .skill-category-card, .rec-card');
+    const elementsToReveal = document.querySelectorAll(
+      '.section, .showcase-card, .secondary-showcase-card, .spec-card-box, .experience-product-card, .education-product-card, .skill-category-card, .award-item-card, .cert-item-card'
+    );
     
     elementsToReveal.forEach((el) => {
       el.classList.add('reveal-on-scroll');

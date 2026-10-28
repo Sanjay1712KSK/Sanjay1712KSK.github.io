@@ -419,3 +419,4 @@ export const PORTFOLIO_DATA = {
     }
   ] as CertificationItem[]
 };
+

@@ -157,3 +157,4 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPath, onNavigate 
     </header>
   );
 };
+
