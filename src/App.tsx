@@ -1,100 +1,98 @@
-import { useEffect, useState, useCallback } from 'react';
-import './App.css';
-import { Navigation } from './components/Navigation';
+import { useCallback, useEffect, useState } from 'react';
+import { Nav } from './components/Nav';
 import { Footer } from './components/Footer';
 import { HomePage } from './pages/HomePage';
 import { ResumePage } from './pages/ResumePage';
+import { AyanCraftsPage } from './pages/AyanCraftsPage';
+import { InspirationsPage } from './pages/InspirationsPage';
+import { useRevealOnScroll, useScrollScenes, useTilt } from './hooks/useScroll';
+import { PATHS, routeFromLocation, type Route } from './utils/routes';
 
-function App() {
-  // Normalize initial path to handle root, /resume, /resume/, and hash routes
-  const getInitialPath = (): string => {
-    const path = window.location.pathname.toLowerCase();
-    const hash = window.location.hash.toLowerCase();
+type Theme = 'light' | 'dark';
 
-    if (path.includes('/resume') || hash.includes('resume')) {
-      return '/resume/';
-    }
-    return '/';
-  };
+const TITLES: Record<Route, string> = {
+  home: 'Sanjay Kumar S | AI & Systems Engineer · Founder, Ayan Crafts',
+  resume: 'Resume | Sanjay Kumar S',
+  crafts: 'Ayan Crafts | Open-source studio by Sanjay Kumar S',
+  inspirations: 'Inspirations | Sanjay Kumar S',
+};
 
-  const [currentPath, setCurrentPath] = useState<string>(getInitialPath);
+const readTheme = (): Theme =>
+  document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
 
-  const navigateTo = useCallback((newPath: string) => {
-    // Normalize path
-    const normalized = newPath.endsWith('/') || newPath.includes('#') ? newPath : `${newPath}/`;
-    
-    if (window.location.pathname !== normalized) {
-      window.history.pushState({}, '', normalized);
-    }
-    setCurrentPath(normalized);
+export default function App() {
+  const [route, setRoute] = useState<Route>(routeFromLocation);
+  const [theme, setTheme] = useState<Theme>(readTheme);
+
+  useEffect(() => {
+    const onPop = () => setRoute(routeFromLocation());
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
   }, []);
 
-  // Handle browser back/forward buttons
   useEffect(() => {
-    const handlePopState = () => {
-      const path = window.location.pathname.toLowerCase();
-      const hash = window.location.hash.toLowerCase();
+    document.documentElement.setAttribute('data-theme', theme);
+    try {
+      localStorage.setItem('theme', theme);
+    } catch {
+      /* storage unavailable: theme still applies for this visit */
+    }
+  }, [theme]);
 
-      if (path.includes('/resume') || hash.includes('resume')) {
-        setCurrentPath('/resume/');
+  useEffect(() => {
+    document.title = TITLES[route];
+    document.documentElement.dataset.route = route;
+  }, [route]);
+
+  // On first load, honour a deep link such as /#work once content has rendered.
+  useEffect(() => {
+    const id = window.location.hash.slice(1);
+    if (id && !id.startsWith('/')) {
+      requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView());
+    }
+  }, []);
+
+  useRevealOnScroll(route);
+  useScrollScenes(route);
+  useTilt();
+
+  /** Navigate between pages, optionally landing on a section of the home page. */
+  const navigate = useCallback((to: Route, sectionId?: string) => {
+    const url = sectionId ? `${PATHS[to]}#${sectionId}` : PATHS[to];
+    window.history.pushState({}, '', url);
+    setRoute(to);
+    requestAnimationFrame(() => {
+      if (sectionId) {
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
       } else {
-        setCurrentPath('/');
+        window.scrollTo({ top: 0 });
       }
-    };
-
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
-  }, []);
-
-  // Subtle, accessible scroll reveal observer
-  useEffect(() => {
-    // Check if user prefers reduced motion
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) return;
-
-    const observerOptions: IntersectionObserverInit = {
-      root: null,
-      rootMargin: '0px 0px -40px 0px',
-      threshold: 0.08
-    };
-
-    const handleIntersect: IntersectionObserverCallback = (entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-          observer.unobserve(entry.target);
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(handleIntersect, observerOptions);
-    const elementsToReveal = document.querySelectorAll(
-      '.section, .showcase-card, .secondary-showcase-card, .spec-card-box, .experience-product-card, .education-product-card, .skill-category-card, .award-item-card, .cert-item-card'
-    );
-    
-    elementsToReveal.forEach((el) => {
-      el.classList.add('reveal-on-scroll');
-      observer.observe(el);
     });
-
-    return () => observer.disconnect();
-  }, [currentPath]);
+  }, []);
 
   return (
-    <div className="portfolio-app">
-      <Navigation currentPath={currentPath} onNavigate={navigateTo} />
-
-      <main id="main-content" className="main-content">
-        {currentPath.startsWith('/resume') ? (
-          <ResumePage onNavigate={navigateTo} />
+    <>
+      <a href="#main" className="skip-link">
+        Skip to content
+      </a>
+      <Nav
+        route={route}
+        theme={theme}
+        onToggleTheme={() => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))}
+        onNavigate={navigate}
+      />
+      <main id="main">
+        {route === 'resume' ? (
+          <ResumePage onNavigate={navigate} />
+        ) : route === 'crafts' ? (
+          <AyanCraftsPage onNavigate={navigate} />
+        ) : route === 'inspirations' ? (
+          <InspirationsPage onNavigate={navigate} />
         ) : (
-          <HomePage onNavigate={navigateTo} />
+          <HomePage onNavigate={navigate} />
         )}
       </main>
-
-      <Footer onNavigate={navigateTo} />
-    </div>
+      <Footer />
+    </>
   );
 }
-
-export default App;

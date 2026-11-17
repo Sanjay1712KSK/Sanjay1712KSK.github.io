@@ -11,12 +11,12 @@ function githubPagesRouting(): Plugin {
       const indexHtml = path.join(distDir, 'index.html');
 
       if (fs.existsSync(indexHtml)) {
-        // Create dist/resume/index.html for direct navigation to /resume/
-        const resumeDir = path.join(distDir, 'resume');
-        if (!fs.existsSync(resumeDir)) {
-          fs.mkdirSync(resumeDir, { recursive: true });
+        // Create dist/<route>/index.html so /resume/, /ayan-crafts/ and /inspirations/ load directly on GitHub Pages
+        for (const route of ['resume', 'ayan-crafts', 'inspirations']) {
+          const dir = path.join(distDir, route);
+          fs.mkdirSync(dir, { recursive: true });
+          fs.copyFileSync(indexHtml, path.join(dir, 'index.html'));
         }
-        fs.copyFileSync(indexHtml, path.join(resumeDir, 'index.html'));
 
         // Create dist/404.html for SPA fallback on GitHub Pages
         fs.copyFileSync(indexHtml, path.join(distDir, '404.html'));
